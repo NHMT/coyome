@@ -1,0 +1,75 @@
+<% include ../template/header %>
+<div class="container mt-3 mb-3 pr-0 pl-0 all_post">
+    <div class="card">
+        <div class="card-header">
+            <div class="row align-items-center">
+                <div class="col-12">
+                <h5 style="font-size:20px;text-align: center;">Sửa bài viết</h5>
+                </div>
+            </div>
+        </div>
+        <%baiviet.forEach((bv)=>{%>
+        <form action="/user/update-post" method="POST" class="pl-lg-3 pr-lg-3" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="hidden" name="id_baiviet" value="<%= bv.id%>"/>
+                <label for="comment" class="addPost_tieude mt-3">Tiêu đề bài viết</label>
+                <textarea class="form-control" rows="2" id="comment" name="tieude" required><%= bv.tieude%></textarea>
+            </div>
+            <div class="form-group">
+                <label for="comment" class="addPost_tieude">Trích dẫn</label>
+                <textarea class="form-control" rows="2" id="comment" name="trichdan" required><%= bv.trichdan%></textarea>
+            </div>
+            <div class="row mb-3">
+                <div class="col-xl-4">
+                    <label for="comment" class="addPost_tieude">Ảnh đại diện cho bài viết</label>
+                    <div class="custom-file">
+                        <input type="hidden"name="anhcu" value="<%= bv.des_pic%>"/>
+                        <img src="/img-posts/<%= bv.des_pic%>" alt="" class="img-thumbnail" width="100%"/>
+                        <input type="file" class="custom-file-input" id="customFile" name="anh" value="<%= bv.des_pic%>"/>
+                        <label class="custom-file-label" for="customFile">Chọn ảnh khác</label>
+                    </div>
+                </div>
+                <div class="col-xl-4">
+                    <label for="comment" class="addPost_tieude">Chủ đề bài viết</label>
+                    <select class="custom-select" name="chude" required>
+                        <% chude.forEach((cd)=>{
+                            if(cd.id == bv.id_chude) {
+                            %>
+                                <option value="<%=cd.id%>" selected > <%= cd.ten_cd%> </option>
+                            <%}else{%>
+                                <option value="<%=cd.id%>"><%= cd.ten_cd%></option>
+                        <%}})%>
+                    </select>
+                </div>
+                <div class="col-xl-4">
+                    <label for="comment" class="addPost_tieude">Keyword</label>
+                    <textarea class="form-control" rows="1" id="comment" name="keyword"><%= bv.keyword%></textarea>
+                </div>
+            </div>
+            
+
+            <!-- CK Editor -->
+            <label for="comment" class="addPost_tieude">Nội dung</label>
+            <textarea name="ckeditor_form" id="ckeditor"><%= bv.noidung%></textarea>
+            <!--End CK Editor -->
+            <button type="submit" class="btn btn-warning col-6 offset-3 test mt-3 mb-2">Cập nhật bài viết</button>
+        </form>
+        <%})%>
+    </div>
+</div>
+<script>
+CKEDITOR.replace('ckeditor');
+$('.test').click(function(){
+    
+ var data = CKEDITOR.instances.ckeditor.getData();
+ //console.log(data);
+})
+
+$(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+
+</script>
+
+<% include ../template/footer %>

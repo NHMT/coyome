@@ -1,0 +1,311 @@
+<% include ../template/header %>
+	<div class="background_user">
+		<img src="/img/background_user.png" alt="" width="100%">
+		<div class="avatar ">
+			<div class="drop_image mb-3">
+				<%if(!data.avatar){%>
+					<img src="/img-users/image_default.png" class="img-fluid mx-auto d-block" alt="Cinque Terre"/>
+				<%}else{%>
+				<img src="/img-users/<%= data.avatar %>" class="img-fluid mx-auto d-block" alt="Cinque Terre"/>
+				<%}%>
+			</div>
+			<h5 class="name_user text-center"> <%= data.ten_dn %>
+				<div class="badge_user"></div>
+			</h5>
+			<div class="description_user text-center">Cuộc sống này thật tuyệt</div>
+		</div>
+	<!-- End Avartar -->
+	</div>
+	<!-- End Background User -->
+	<div class="container nav_user">
+		<div class="col-sm-6 btn-group d-flex justify-content-center action_user">
+		<% if(user){ user.forEach(function(user){
+			if(data.id == user.id){%>
+			<a href="/user/all-posts/<%=user.id%>" type="button" class="btn btn-primary btn-1"><i class="fas fa-newspaper"></i> Quản lý bài viết</a>
+		  	<a type="button" class="btn btn-primary btn-4"><i class="fas fa-user-circle"></i> Quản lý tài khoản</a>
+		  	<a href='/user/letter-box/<%=user.id%>' type="button" class="btn btn-primary btn-3"><i class="fas fa-envelope"></i> Quản lý hộp thư</a>
+		  <%}else{%>
+		  	<%var datheodoi = 0;
+			user_following.forEach(function(following){ 	  
+			if(following.id_user == user.id){
+				datheodoi++;
+			}})
+			if(datheodoi == 1){
+			%>
+				<button type="button" class="btn btn-primary btn-1" disabled><i class="fas fa-check"></i> Đã theo dõi</button>
+			<%}else{%>
+				<button data-id1="<%= user.id%>" data-id2="<%= data.id%>" type="button" class="btn btn-primary btn-1"><i class="fas fa-user-plus"></i> Follow</button>
+			<%}%>
+			<% user_connect.forEach((user_connect)=>{
+				if(user_connect.id == data.id){%>
+					<button data-id1="<%= user.id%>" data-id2="<%= data.id%>" type="button" class="btn btn-primary btn-2"><i data-connect='0' class="fas fa-link click_connect"></i> Đã kết nối</button>
+				<%}else{
+			
+					var connect = 0;
+					cho_connect.forEach((cho_cn)=>{
+					if(cho_cn.id_usercon1 == user.id){
+						connect++;
+					}})
+					if(connect == 1){%>
+						<button data-id1="<%= user.id%>" data-id2="<%= data.id%>" type="button" class="btn btn-primary btn-2"><i data-connect="1" class="fas fa-link click_connect"></i> Chờ phản hồi</button>
+					<%}else{%>
+						<button data-id1="<%= user.id%>" data-id2="<%= data.id%>" type="button" class="btn btn-primary btn-2"><i data-connect='0' class="fas fa-link click_connect"></i> Kết nối</button>
+					<%}
+				}})%>
+		  	<button type="button" class="btn btn-primary btn-3 nut_show_report_user"><i class="fas fa-flag"></i> Kết nối</button>
+		  	<button type="button" class="btn btn-primary btn-3 nut_show_report_user"><i class="fas fa-flag"></i> Báo cáo</button>
+		<%}})}else{%>
+			<i>Hãy đăng nhập để theo dõi và kết bạn với tôi!</i>
+		<%}%>
+		</div>
+		<hr>
+		<ul class="row list-group list-group-horizontal d-flex justify-content-center align-items-center">
+		  <li class="col-sm-2 list-group-item text-sm-center">
+		  	<span class="badge badge-primary badge-pill">
+				<%  var i = 0 
+				user_followers.forEach(function(follower){ i++; })%>
+						<%= i %>
+				</span> 
+				Người theo dõi 
+		  </li>
+		  <li class="col-sm-2 list-group-item text-sm-center">
+		  	<span class="badge badge-danger badge-pill">
+				<%  var i = 0 
+				user_following.forEach(function(following){ i++; })%>
+						<%= i %>
+				</span> Được theo dõi
+		  </li>
+		  <li class="col-sm-2 list-group-item text-sm-center">
+		  	<span class="badge badge-success badge-pill">
+				<%= Object.keys(user_con).length%>
+				</span> Kết nối
+		  </li>
+		  <li class="col-sm-2 list-group-item text-sm-center">
+		  	<span class="badge badge-info badge-pill">
+			  <%= Object.keys(user_baiviet).length%>
+			  </span> Bài viết
+		  </li>
+		  <li class="col-sm-2 list-group-item text-sm-center">
+		  	<span class="badge badge-dark badge-pill">
+			  <%var i = 0; user_comment.forEach(function(bv_cm){i++})
+			   %><%= i%>
+			  </span> Bình luận
+		  </li>
+		</ul>
+	</div>
+	<!-- End Nav User -->
+	<div class="container-fluid content_user mt-3">
+		<div class="row">
+			<div class="col-md-3 content_user_left">
+				<div class="about_me">
+					<div class="title_about text-center">Thông tin về tôi</div>
+					<div class="about_body">
+						<p><i class="fas fa-user"></i> <b>Họ tên:</b> <%= data.hoten %></p>
+						<p><i class="fas fa-map-marked-alt"></i> <b>Địa chỉ:</b> <%= data.diachi %></p>
+						<p><i class="fas fa-birthday-cake"></i> <b>Ngày sinh:</b> <%= moment(data.ngaysinh).format('DD-MM-YYYY') %></p>
+					</div>
+					<div class="social_user">
+						<b class="d-flex justify-content-center">Kết nối với tôi</b>
+						<div class="row btn_social_user">
+							<div class="col-sm-6 text-sm-center">
+								<p><i class="fab fa-facebook-f fa_user"></i>/Yoona</p>
+							</div>
+							<div class="col-sm-6 text-sm-center">
+								<p><i class="fab fa-twitter tw_user"></i>/Yoona</p>
+							</div>
+							<div class="col-sm-6 text-sm-center">
+								<p><i class="fab fa-instagram in_user"></i></i>/Yoona</p>
+							</div>
+							<div class="col-sm-6 text-sm-center">
+								<p><i class="fab fa-youtube yo_user"></i></i>/Yoona</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 content_user_center">
+			<% if(Object.keys(user_baiviet).length === 0){ %>
+				<div class="alert alert-danger text-center">
+					<strong><%= data.hoten %></strong> Chưa có bài viết nào!.
+				</div>
+			<% }else{ %>
+			<% user_baiviet.forEach(function(bv){ %>
+				<div class="news_feed" id="card_baiviet_<%=bv.id%>">
+					<div class="row news_feed_user_content">
+						<div class="col-sm-4 news_feed_user_img">
+							<%if(!bv.des_pic){%>
+								<img src="/img-posts/default-post.png" class="img-fluid" alt="" width="100%"/>
+							<%}else{%>
+								<img src="/img-posts/<%= bv.des_pic %>" class="img-fluid" alt="" width="100%"/>
+							<%}%>
+						</div>
+						<div class="col-sm-8">
+							<p class="news_feed_user_title"><%= bv.tieude %></p>
+							<p class="news_feed_user_posted_date"><i class="fas fa-clock"></i> 
+								<%= moment(bv.created_at).format('hh:mm (DD/MM/YYYY)') %>
+								<i>trong</i> 
+								<% chude_baiviet.forEach(function(cd){ 
+									if(cd.id == bv.id_chude){
+									%>
+									<a href="/<%= cd.ten_cd %>"><b><%= cd.ten_cd %></b></a>
+								<% }})%>
+							</p>
+							<p class="news_feed_user_body mt-2 mb-0"><%= bv.trichdan %></p>
+						</div>
+					</div>
+					<div class="row news_feed_user_footer mx-0">
+						<div class=" col-xl-4 mt-3 text-center">
+							<% var like = 0;
+								var dislike = 0;
+							baiviet_vote.forEach(function(bv_vote){ 
+									if(bv_vote.id_baiviet == bv.id){
+										if(bv_vote.loaivote == 0){
+											like++;
+										}else if(bv_vote.loaivote == 1){
+											dislike++;
+										}
+									}
+								%>
+							<% }) %>
+							<span class="badge badge-primary"><%= like %> <i class="fas fa-thumbs-up"></i></span>
+							<span class="badge badge-danger"><%= dislike %> <i class="fas fa-thumbs-down"></i></span>
+							<% var i = 0
+							baiviet_comment.forEach(function(bv_cmt){
+								if(bv_cmt.id_baiviet == bv.id){
+									i++; %>
+							<% }}) %>
+							<span class="badge badge-info"><%=i%> <i class="fas fa-comment-dots"></i></span>
+							<% if(bv.da_xem == null) { %>
+								<span class="badge badge-success">0 <i class="fas fa-eye"></i></span>
+							<%}else{%>
+								<span class="badge badge-success"><%= bv.da_xem %> <i class="fas fa-eye"></i></span>
+							<% } %>
+						</div>
+
+						<% if(user){ user.forEach(function(user){
+							if(data.id == user.id){%>
+								<a href="/user/posts-detail/<%=bv.id%>" class="col-xl-7 btn btn-info btn-block mt-2">Chi tiết</a>
+								<a tabindex="0"  data-id='<%= bv.id%>' class="col-xl-1 mt-2 text-center btn popover_card" role="button" data-html="true" data-toggle="popover" data-trigger="focus" title="Bạn muốn làm gì?" 
+								data-content="
+									<a href='/user/post-edit/<%= bv.id%>' class='btn btn-outline-warning sua-card'><i class='fas fa-edit'></i> Sửa</a>
+									<div class='btn btn-outline-danger ml-4 xoa-card'><i class='fas fa-trash-alt'></i> Xóa</div>
+								"style="cursor:pointer"><i class="fas fa-ellipsis-v" style="color: #2196f3;"></i></a>
+							<%}else{%>
+								<a href="/user/posts-detail/<%=bv.id%>" class="col-xl-8 btn btn-info btn-block mt-2">Chi tiết</a>
+							<%}})}else{%>
+							<a href="/user/posts-detail/<%=bv.id%>" class="col-xl-8 btn btn-info btn-block mt-2">Chi tiết</a>
+							<%}%>
+					</div>
+				</div>
+				<% })} %>
+
+			</div>
+			<div class="col-md-3 content_user_right">
+				<div class="connect_with_me">
+					<div class="title_connect text-center">Bạn của tôi</div>
+					<div class="connect_body">
+					<% if(Object.keys(user_connect).length ===0){ %>
+						<p class="text-center font-italic">Không có!</p>
+					<% }else{%>
+					<% user_connect.forEach(function(user_connect){ 
+						if(user_connect.id != data.id){
+						%>
+					<a href="/user/home/<%= user_connect.id %>">
+						<div class="row">
+							<div class="col-sm-11 offset-xl-1">
+								<div class="drop_image">
+								<%if(!user_connect.avatar){%>
+									<img src="/img-users/image_default.png" class="img-fluid mx-auto d-block" alt=""/>
+								<%}else{%>
+									<img src="/img-users/<%= user_connect.avatar %>" class="img-fluid mx-auto d-block" alt=""/>
+									<%}%>
+								</div>
+								<p class="connect_user_name"><%= user_connect.ten_dn %></p>
+							</div>
+						</div>
+					</a>
+					<% }})} %>
+					
+					</div>
+				</div>
+			</div>
+			</div>
+	</div>
+	<div class="report_user">
+		<i class="fas fa-times-circle close_report_user"></i>
+		<h6>Báo cáo người dùng</h6>
+		<form action="">
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+				  <label class="input-group-text" for="report_user_select_box">Vấn đề báo cáo</label>
+				</div>
+				<select class="custom-select" id="report_user_select_box" required>
+				  <option selected></option>
+				  <option value="1">One</option>
+				  <option value="2">Two</option>
+				  <option value="3">Three</option>
+				</select>
+			  </div>
+		</form>
+		<textarea id="froala-editor_report_user"></textarea>
+		<button type="submit" class="btn btn-primary btn-sm d-flex nut_submit_bao_cao_user mt-2 mb-2">Gửi báo cáo</button>
+	</div>
+	<!-- End Content User -->
+	<script>
+
+		new FroalaEditor('#froala-editor_report_user', { 
+			height: 200,
+			width: 800
+		})
+		$(document).ready(function() {
+			var isMobile = false; //initiate as false
+			// device detection
+			if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) 
+				|| /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0,4))) { 
+				isMobile = true;
+			}
+			if (isMobile != true) {
+				var vitri_About_Me = $('.about_me').offset().top;
+				var vitri_Connect_With_Me = $('.connect_with_me').offset().top;
+				$(window).scroll(function(event) {
+					var vitri_body = $('html, body').scrollTop();
+					if ((vitri_body + 100) >= vitri_About_Me) {
+						$('.about_me').addClass('about_me_fixed');
+					}
+					else{
+						$('.about_me').removeClass('about_me_fixed');
+					}
+					if ((vitri_body + 100) >= vitri_Connect_With_Me) {
+						$('.connect_with_me').addClass('connect_with_me_fixed');
+					}
+					else{
+						$('.connect_with_me').removeClass('connect_with_me_fixed');
+					}
+				});
+			}
+
+
+			// var socket = io("http://localhost:4000");
+			// //client nhận dữ liệu từ server
+			// socket.on("Server-sent-data", function(data)
+			// {
+			// 	alert(data);
+			// 	// $("#chat-content").append(data);
+			// });
+			// $(".btn-2").click(function(){
+			// 	var id_user = $(this).data('id1');
+			// 	var id_user2 = $(this).data('id2');
+			// 	var connect = $('.click_connect').data('connect');
+			// 	if (connect == 0) {
+			// 		$('.btn-2').html('<i data-connect="1" class="fas fa-link click_connect"></i> Chờ phản hồi');
+			// 		socket.emit("Con", {id_user:id_user,id_user2:id_user2});
+			// 	}else{
+			// 		$('.btn-2').html('<i data-connect="0" class="fas fa-link click_connect"></i> Kết nối');
+			// 		socket.emit("UnCon", {id_user:id_user,id_user2:id_user2});
+			// 	}
+			// });
+			
+		})
+	</script>
+
+	<% include ../template/footer %>

@@ -1,0 +1,208 @@
+<% include template/header %>
+    <div class="container-fluid posts_detail mt-3">
+		<div class="col-sm-12 head_posts_detail">
+        <% baiviet.forEach(function(bv){%>
+            <% author.forEach(function(at){%>
+			<div class="row writer_info pt-3">
+                <div class="col-sm-12 col-md-9">
+                    <a href="/user/home/<%= at.id%>" class="drop_img mr-4"><img src="/img-users/<%= at.avatar%>" alt="" width="100%"/></a>
+                    <p class="pt-1 writer_name"><i class="fas fa-user-edit"></i> <%= at.ten_dn%></p>
+                    <p><i class="fas fa-clock"></i> <%= moment(bv.created_at).format('DD-MM-YYYY') %> in 
+                        <% chude.forEach(function(cd){ %>
+                            <a href="<%= cd.id%>"><%= cd.ten_cd%></a>
+                        <%})%>
+                    </p>
+                </div>
+                <div class="col-sm-2 col-md-3 writer_info_right">
+                    <span class="d-flex justify-content-right">Bài viết: <b class="ml-1"><%=all_baiviet_user%></b>
+                    </span>
+                    <span  class="d-flex justify-content-right">Được theo dõi: <b class="ml-1"><%=duoc_follow%></b></span>
+                    <span  class="d-flex justify-content-right">Ngày tham gia: <b class="ml-1"><%= moment(at.created_at).format('DD-MM-YYYY') %></b></span>
+                </div>
+			</div>
+            <% }) %> 
+            <hr>
+            <div class="row title_posts">
+				<h4 class="col-sm-10 offset-1 pt-3 pb-4 pl-0"><%= bv.tieude%></h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-1">
+				<div class="post_detail_action">
+					<button class="btn post_detail_vote_up">
+						1 <i class="fas fa-sort-up d-flex align-items-center"></i>
+					</button>
+					<hr class="mt-0 mb-0">
+					<button class=" btn post_detail_vote_down">
+						<i class="fas fa-sort-down d-flex align-items-center"></i> 2
+					</button>
+					<hr>
+					<button class="btn post_detail_report nut_report_baiviet "><i class="fas fa-flag  d-flex align-items-center"></i></button>
+				</div>
+			</div>
+			<div class="col-sm-8 body_posts_detail">
+				<% if(!bv.des_pic){ %>
+					<img src="/img-posts/default-post.png" class="mb-4" alt="" width="100%"/>
+				<%}else{%>
+					<img src="/img-posts/<%= bv.des_pic%>" class="mb-4" alt="" width="100%"/>
+				<%}%>
+				<div class="content_posts">
+					<%- bv.noidung%>
+				</div>
+			</div>
+			<div class="col-sm-3 pl-xl-0">
+				<div class="post_detail_bvlienquan mb-3">
+					<h5 class="post_detail_title_bvlienquan mb-0">Bài viết cùng chủ đề</h5>
+					<div class="list-group overflow-auto" style="height: 350px;">
+					<%baiviet_cungcd.forEach((bv_ccd)=>{%>
+						<a href="/user/posts-detail/<%=bv_ccd.id%>" class="list-group-item list-group-item-action flex-column align-items-start" style="padding: 0;">
+							<div class="row mx-auto" width="100%">
+								<div class="col-4 pl-0 pr-0">
+									<img src="/img-posts/<%=bv_ccd.des_pic%>" class="img-fluid" alt=""/>
+								</div>
+								<div class="d-flex w-100 justify-content-start col-8 pl-1">
+									<h6 class="title_post_detail mb-1"><%=bv_ccd.tieude%></h6>
+								</div>
+							</div>
+						</a>
+					<%})%>
+					</div>
+				</div>
+				<div class="post_detail_bvbanbe">
+					<h5 class="post_detail_title_bvbanbe mb-0">Bài viết của bạn bè</h5>
+					<div class="list-group overflow-auto" style="height: 350px;">
+					<% if(baiviet_bb == null){ %>
+					<p class="text-center">Không có bài viết nào từ bạn bè</p>
+					<%} else{ baiviet_bb.forEach((bv_bb)=>{%>
+					<a href="/user/posts-detail/<%=bv_bb.id%>" class="list-group-item list-group-item-action flex-column align-items-start" style="padding: 0;">
+						<div class="row mx-auto" width="100%">
+							<div class="col-4 pl-0 pr-0">
+								<img src="/img-posts/<%=bv_bb.des_pic%>" class="img-fluid" alt=""/>
+							</div>
+							<div class="d-flex w-100 justify-content-start col-8 pl-1">
+								<h6 class="title_post_detail mb-1"><%=bv_bb.tieude%></h6>
+							</div>
+						</div>
+					</a>
+					<%})}%>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <% }) %>
+	<!-- End posts_detail -->
+	<h6 class="container mt-3"><i class="fas fa-comment"></i> 4 bình luận</h6>
+	<div class="container comment_box_posts_detail mt-3 mb-3">
+		
+		<div class="input-group row comment_of_me">
+			<div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1"><i class="fas fa-comment-dots"></i></span>
+			</div>
+		  <input type="text" class="form-control" placeholder="Your comment...">
+		  <div class="input-group-append">
+		    <button class="btn btn-outline-secondary" type="button"><i class="fas fa-paper-plane"></i></button>
+		  </div>
+		</div>
+
+		<% comment.forEach((cm)=>{
+			user_comment.forEach((u_cm)=>{
+				if(cm.id_user == u_cm.id){
+			%>
+		<div class="row comment">
+			<div class="col-sm-1 vote">
+			<%var cmt_up=0;
+			var cmt_down =0; 
+			luotvote_comment.forEach((lv_cm)=>{
+				if(lv_cm.id_cmt == cm.id){
+					if(lv_cm.loaivote == 1){
+						cmt_up++;
+					}
+					else if(lv_cm.loaivote == 0){
+						cmt_down++;
+					}
+				}})
+				%>
+				<a href="">
+					<i class="fas fa-caret-up"></i>
+					<span class="text-center d-flex justify-content-center"><%= cmt_up%></span>
+				</a>
+				<hr>
+				<a href="" style="color: red;">
+					<span class="text-center d-flex justify-content-center"><%= cmt_down%></span>
+					<i class="fas fa-caret-down"></i>
+				</a>
+				
+			</div>
+			<div class="col-sm-11 comment_content">
+				<div class="author_comment">
+					<a href="/user/home/<%=u_cm.id%>" class="drop_img">
+					<% if(u_cm.avatar){%>
+						<img src="/img-users/<%=u_cm.avatar%>" alt="" width="100%"/>
+					<%}else{%>
+						<img src="/img-users/image_default.png" alt="" width="100%"/>
+					<%}%>
+					</a>
+					<a href="/user/home/<%=u_cm.id%>" class="author_name d-flex justify-content-start pt-1"><%=u_cm.ten_dn%></a>
+					<i class="comment_date d-flex justify-content-start"  style="font-size:13px;"><%= moment(cm.updated_at).format('hh:mm (DD/MM/YYYY)') %></i>
+				</div>
+				<div class="row content mt-1 ml-2" style="font-size:14px;font-weight: 600;"><%= cm.noidung%></div>
+				<button class="row btn  ml-2 traloi_cm" data-id="<%=u_cm.id%>">Trả lời</button>
+				<div class="o_nhap_comment_<%=u_cm.id%>"></div>
+				<%comment_comment.forEach((cm_cm)=>{
+					if(cm.id == cm_cm.id_luotcmt){
+						user_comment.forEach((u_cm_cm)=>{
+						if(cm_cm.id_user == u_cm_cm.id){
+					%>
+					<hr class="mb-0 mt-0"/>
+				<div class="col-sm-12 ml-3 comment_content">
+					<div class="author_comment">
+						<a href="/user/home/<%=u_cm_cm.id%>" class="drop_img">
+						<% if(u_cm_cm.avatar){%>
+							<img src="/img-users/<%=u_cm_cm.avatar%>" alt="" width="100%"/>
+						<%}else{%>
+							<img src="/img-users/image_default.png" alt="" width="100%"/>
+						<%}%>
+						</a>
+						<a href="/user/home/<%=u_cm_cm.id%>" class="author_name d-flex justify-content-start pt-1"><%=u_cm_cm.ten_dn%></a>
+						<span class="comment_date d-flex justify-content-start" style="font-size:13px;"><%= moment(cm_cm.updated_at).format('hh:mm (DD/MM/YYYY)') %></span>
+					</div>
+					<div class="row content mt-1 ml-2" style="font-size:14px;font-weight: 600;"><%= cm_cm.noidung%></div>
+				</div>
+				<%}})}})%>
+			</div>
+		</div>
+		<%}})})%>
+		<a href="" class="d-flex justify-content-center pb-2">Thêm bình luận</a>
+	</div>
+	<!-- form report bai viet -->
+	<div class="report_baiviet">
+		<h6 class="tieude_report_baiviet">Báo cáo bài viết </h6>
+		<form action="">
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+				  <label class="input-group-text" for="report_baiviet_select_box">Vấn đề báo cáo</label>
+				</div>
+				<select class="custom-select" id="report_baiviet_select_box" required>
+				  <option selected></option>
+				  <option value="1">One</option>
+				  <option value="2">Two</option>
+				  <option value="3">Three</option>
+				</select>
+			</div>
+			<textarea id="froala-editor_report_baiviet"></textarea>
+			<button type="submit" class="btn btn-primary btn-sm d-flex nut_submit_bao_cao_baiviet mt-2 mb-2">Gửi báo cáo</button>
+		</form>
+	</div>
+	<script>
+		new FroalaEditor('#froala-editor_report_baiviet', { 
+			height: 200,
+			width: 800
+		})
+		$('.traloi_cm').click(function(){
+			var id = $(this).data('id');
+			$('.o_nhap_comment_'+id).html('<textarea type="text" class="form-control" placeholder=""></textarea>');
+		})
+	</script>
+	<!-- End comment_posts_detail -->
+<% include template/footer %>

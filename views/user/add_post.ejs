@@ -1,0 +1,104 @@
+<% include ../template/header %>
+<div class="container mt-3 mb-3 pr-0 pl-0 all_post">
+    <div class="card">
+        <div class="card-header">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5 class="text-center" style="font-size:20px;">Viết bài mới</h5>
+                </div>
+            </div>
+        </div>
+        <form action="" method="POST" class="pl-lg-3 pr-lg-3" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="comment" class="addPost_tieude mt-3">Tiêu đề bài viết</label>
+                <textarea class="form-control" rows="2" name="tieude" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="comment" class="addPost_tieude">Trích dẫn</label>
+                <textarea class="form-control" rows="2"  name="trichdan" required></textarea>
+            </div>
+            <div class="row mb-3">
+                <div class="col-xl-4">
+                    <label for="comment" class="addPost_tieude">Ảnh đại diện cho bài viết</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" name="anh" required>
+                        <label class="custom-file-label" for="customFile">Upload ảnh</label>
+                    </div>
+                </div>
+                <div class="col-xl-4">
+                    <label for="comment" class="addPost_tieude">Chủ đề bài viết</label>
+                    <select class="custom-select" name="chude" required>
+                        <option value=""><i>-- Vui lòng chọn chủ đề --</i></option>
+                        <% chude.forEach((cd)=>{%>
+                        <option value="<%=cd.id%>"><%= cd.ten_cd%></option>
+                        <%})%>
+                    </select>
+                </div>
+                <div class="col-xl-4">
+                    <label for="comment" class="addPost_tieude">Keyword</label>
+                    <textarea class="form-control" rows="1" id="keyword" name="keyword"></textarea>
+                     <div class="baiviet_daco dong">
+                        
+                    </div>
+                </div>
+            </div>
+           
+
+
+            <!-- CK Editor -->
+            <label for="comment" class="addPost_tieude">Nội dung</label>
+            <textarea name="ckeditor_form" id="ckeditor"></textarea>
+            <!--End CK Editor -->
+            <button type="submit" class="btn btn-primary col-6 offset-3 test mt-3 mb-2">Lưu bài viết</button>
+        </form>
+    </div>
+</div>
+<div class="col-3" style="visibility:hidden"></div>
+<script>
+    CKEDITOR.replace('ckeditor');
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+    $(document).ready(function () {
+        $('#keyword').change(function () {
+            var value = $(this).val();
+            if(value == ''){
+                $( ".baiviet_daco").html('');
+            }
+            else{
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:3000/user/get_keyword/' + value,
+                success: function (data) {
+                    console.log(data)
+                    if (data.length == 0) {
+                        $( ".baiviet_daco").html('');
+                        
+                    } else if(data.length >=1){
+                        $('.baiviet_daco').removeClass('dong');
+                        $( ".baiviet_daco").html(
+                            '<div style="background-color: #5282c1; color: white;">Bài viết có thể trùng <i class="fas fa-times float-right bvtrung mt-1 mr-2" style="cursor: pointer;"></i></div>'+
+                            '<div class="list-group overflow-auto" style="height: 200px;">'+
+                            data.map((bv)=>{
+                                return('<a href="/user/posts-detail/'+bv.id+'" class="list-group-item list-group-item-action">'+
+                                    '<b style="font-size: 12px;">'+bv.tieude+'</b>'+
+                                '</a>'
+                            )}).join('')+
+                            '</div>'
+                            
+                        );
+                        $('.bvtrung').click(function(){
+                            $('.baiviet_daco').addClass('dong');
+                        });
+                    }
+                }
+            });
+            }
+        });
+        
+    })
+
+</script>
+
+<% include ../template/footer %>

@@ -1,0 +1,213 @@
+<% include ../template/header %>
+<style>
+    .reply_thu {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 85%;
+        visibility: hidden;
+        z-index: 100;
+    }
+
+    .show_reply_thu {
+        visibility: visible;
+    }
+
+    .reply_mo {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 9;
+        top: 0;
+        visibility: hidden;
+    }
+
+    .reply_mo_show {
+        opacity: 0.6;
+        background-color: black;
+        visibility: visible;
+    }
+
+    .gui_thu_moi {
+        position: fixed;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 85%;
+        visibility: hidden;
+        z-index: 100;
+        background-color: white;
+        border-radius: 22px;
+        height: 300px;
+    }
+    .show_gui_thu_moi{
+        visibility: visible;
+    }
+    .gui_thu_moi .title_thu_noi{
+        background-color: #0062cc;
+        color: white;
+        border-top-left-radius: 22px;
+        border-top-right-radius: 22px;
+        text-align: center;
+        padding: 1%;
+    }
+</style>
+<div class="container mt-3 mb-3 pl-0 pr-0" style="background-color: white; border-radius: 22px;">
+    <div class="card" style="border-top-left-radius: 22px; border-top-right-radius: 22px;">
+        <div class="card-header" style="border-top-left-radius: 22px; border-top-right-radius: 22px;">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <h5 class="text-center" style="font-size:20px;">Quản lý hộp thư</h5>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary btn-sm float-right btn_gui_thu_moi" style="width: 20%;"><i
+            class="fas fa-plus-circle"></i> Gửi thư</button>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr style="font-size: 14px;" class="text-center">
+                    <th scope="col" width="2%">STT</th>
+                    <th scope="col" width="20%">Người gửi <i style="font-size: 11px;">(kiểm duyệt viên)</i></th>
+                    <th scope="col">Nội dung</th>
+                    <th scope="col" width="20%">Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="font-size: 14px;">
+                    <th class="text-center align-middle" scope="row">1</th>
+                    <td class="text-center align-middle font-weight-bold">Coyome 1</td>
+                    <td>
+                        Nội dung bài viết <a href="">Những con người thầm lặng</a> của bạn bị một người dùng tố cáo là
+                        đánh cấp. Bạn vui lòng liên hệ <a href="">minh123</a> để giải quyết trước khi bài viết của bạn
+                        sẽ bị ẩn đi vào 3 ngày tiếp theo!
+                    </td>
+                    <td class="text-center align-middle">
+                        <div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
+                            <button class="btn btn-warning btn-sm button-reply "><i class="fas fa-reply"></i> Trả
+                                lời</button>
+                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Xóa</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="font-size: 14px;">
+                    <th class="text-center align-middle" scope="row">2</th>
+                    <td class="text-center align-middle font-weight-bold">LeeFC</td>
+                    <td>
+                        Nội dung bình luận trong bài viết <a href="">Cuộc sống muôn màu</a> của bạn bị người dùng đánh
+                        giá <b>Không phù hợp và không có tính xây dựng</b>. Tài khoản của bạn vừa bị cảnh báo một lần,
+                        nếu 5 lần cảnh báo tài khoản của bạn sẽ bị chặn.
+                    </td>
+                    <td class="text-center align-middle">
+                        <div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
+                            <button class="btn btn-warning btn-sm "><i class="fas fa-reply"></i> Trả lời</button>
+                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Xóa</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="font-size: 14px;">
+                    <th class="text-center align-middle" scope="row">3</th>
+                    <td class="text-center align-middle font-weight-bold">Tuấn1324</td>
+                    <td>
+                        Nội dung bình luận trong bài viết <a href="">Cho tôi cuộc sống mới</a> của bạn bị người dùng
+                        đánh giá <b>Không phù hợp và không có tính xây dựng</b>. Đây là lần thứ 2 tài khoản của bạn bị
+                        cảnh báo, nếu 5 lần cảnh báo tài khoản của bạn sẽ bị chặn.
+                    </td>
+                    <td class="text-center align-middle">
+                        <div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
+                            <button class="btn btn-warning btn-sm "><i class="fas fa-reply"></i> Trả lời</button>
+                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Xóa</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="font-size: 14px;">
+                    <th class="text-center align-middle" scope="row">4</th>
+                    <td class="text-center align-middle font-weight-bold">TTM</td>
+                    <td>
+                        Bài viết <a href="">Cho tôi bình yên</a> của bạn bị ẩn vì số lượng bỏ phiếu <b>Không tốt</b> là
+                        quá lớn.
+                    </td>
+                    <td class="text-center align-middle">
+                        <div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
+                            <button class="btn btn-warning btn-sm "><i class="fas fa-reply"></i> Trả lời</button>
+                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Xóa</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="font-size: 14px;">
+                    <th class="text-center align-middle" scope="row">5</th>
+                    <td class="text-center align-middle font-weight-bold">kmmd11238</td>
+                    <td>
+                        Bài viết <a href="">Tại sao và vì sao</a> của bạn <b>Không được duyệt</b> vì nội dung không phù
+                        hợp với nguyên tác cộng đồng!
+                    </td>
+                    <td class="text-center align-middle">
+                        <div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
+                            <button class="btn btn-warning btn-sm "><i class="fas fa-reply"></i> Trả lời</button>
+                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Xóa</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="reply_thu">
+    <!-- <button type="button" class="btn btn-danger" style="border-radius: 50px;"><i class="fas fa-times"></i></button> -->
+    <textarea id="froala-editor"></textarea>
+    <button type="button" class="btn btn-primary float-right mr-3">Phản hồi <i class="fas fa-paper-plane"></i></button>
+</div>
+<div class="reply_mo"></div>
+<div class="gui_thu_moi">
+    <h6 class="title_thu_noi">Viết thư mới</h6>
+    <form action="">
+        <!-- <button type="button" class="btn btn-danger" style="border-radius: 50px;"><i class="fas fa-times"></i></button> -->
+        <div class="lua_chon_gui_thu col-sm-6 offset-3">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Mục đích gửi thư</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01" required>
+                    <option selected></option>
+                    <option value="1">Trợ giúp tài khoản</option>
+                    <option value="2">Góp ý chủ đề</option>
+                    <option value="3">Xin tham gia đội ngũ</option>
+                </select>
+            </div>
+        </div>
+        <textarea id="froala-editor"></textarea>
+        <button type="submit" class="btn btn-primary float-right mr-3">Gửi <i class="fas fa-paper-plane"></i></button>
+    </form>
+</div>
+<script>
+    $('.button-reply').click(() => {
+        $('.reply_thu').addClass('show_reply_thu');
+        $('.reply_mo').addClass('reply_mo_show');
+    });
+    $('.reply_mo').click(() => {
+        $('.reply_mo').removeClass('reply_mo_show');
+        $('.reply_thu').removeClass('show_reply_thu');
+        $('.gui_thu_moi').removeClass('show_gui_thu_moi');
+    })
+    $('.btn_gui_thu_moi').click(() => {
+        $('.gui_thu_moi').addClass('show_gui_thu_moi');
+        $('.reply_mo').addClass('reply_mo_show');
+    });
+    new FroalaEditor('#froala-editor', {
+        height: 300,
+        events: {
+            initialized: function () {
+                var editor = this;
+                editor.events.bindClick(editor.$('body'), 'a#get-text', function () {
+                    editor.html.set('');
+                    editor.events.focus();
+                })
+            }
+        }
+    })
+</script>
+
+<% include ../template/footer %>

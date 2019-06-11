@@ -1,0 +1,348 @@
+<% include template/header %>
+<style>
+    .img-round {
+        position: relative;
+        height: 0;
+        padding-bottom: 100%;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .img-round>img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -o-object-fit: cover;
+        object-fit: cover;
+    }
+
+    .baiviet_chude_noibat {
+        background-color: white;
+    }
+
+    .baiviet_noibat_tin {
+        border-bottom: 1px solid lightgrey;
+    }
+
+    .baiviet_chude_noibat .tieude_noibat {
+        font-size: 15px;
+        background-color: #009688;
+        text-align: center;
+        color: white;
+        padding: 11.5px;
+        margin-bottom: 0;
+    }
+
+    .baiviet_noibat_tin {
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+
+    .baiviet_noibat_tin h5 {
+        font-size: 14px;
+    }
+
+    .baiviet_noibat_tin p {
+        font-size: 13px;
+    }
+
+    .tieude_chude {
+        background-color: #3F51B5;
+        width: 10%;
+        color: white;
+        padding: 5px;
+        text-align: center;
+    }
+    #tab_loc{
+        background-color: #3F51B5;
+    }
+    #tab_loc .nav-item .nav-link{
+        border-radius: 0;
+        color: white;
+    }
+    #tab_loc .nav-item .nav-link.active{
+        color: #3F51B5;
+    }
+</style>
+<div class="container-fluid mt-3 mb-3">
+    <h6 class="tieude_chude"><i class="fas fa-angle-right"></i> Công nghệ</h6>
+</div>
+<div class="container-fluid mt-3 mb-3">
+    <div class="row">
+        <div class="col-xl-8">
+            <ul class="nav nav-tabs" id="tab_loc" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                        aria-controls="home" aria-selected="true"><i class="fas fa-clock"></i> Mới nhất</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                        aria-controls="profile" aria-selected="false"><i class="fab fa-hotjar"></i> Nổi bật</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                        aria-controls="contact" aria-selected="false"><i class="fas fa-user-edit"></i> Chuyên viên viết bài</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="card mt-3">
+                        <div class="row mb-3 mt-3">
+                            <div class='col-sm-1 ml-4'>
+                                <div class='img-round'>
+                                    <img src='/img-users/cp.jpg' alt="">
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="mb-0"><b>Minh Thông</b></p>
+                                <span>11:25 (19/05/2019)</span>
+                            </div>
+                        </div>
+                        <a href="" style="text-decoration: none; color: black;">
+                            <div class="row pb-3 pl-4 no-gutters">
+                                <div class="col-md-4">
+                                    <img src="/img-posts/cn_1.png" class="card-img-top" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body pt-0 pb-0">
+                                        <h5 class="card-title" style="font-size: 20px;">Mời anh em tải về Game RiME miễn
+                                            phí
+                                        </h5>
+                                        <p class="card-text" style="font-size: 15px;">Cửa hàng Epic Games đang miễn phí
+                                            Game
+                                            RiME có giá trị 11.99$, đây là một tựa game kể về câu chuyện cậu bé lạc trên
+                                            đảo
+                                            hoang sau một vụ đắm tàu và bị mất trí nhớ...</p>
+                                        <p class="card-text float-right" style="font-size: 16px;">
+                                            3 <i class="fas fa-chevron-circle-up mr-3" style="color: #4CAF50"></i>
+                                            7 <i class="fas fa-chevron-circle-down mr-3" style="color: #F44336;"></i>
+                                            15 <i class="fas fa-eye mr-3" style="color: #FFC107;"></i>
+                                            12 <i class="fas fa-comment-alt" style="color: #00BCD4;"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="row mb-3 mt-3">
+                            <div class='col-sm-1 ml-4'>
+                                <div class='img-round'>
+                                    <img src='/img-users/user_2.jpg' alt="">
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="mb-0"><b>Công Tuấn</b></p>
+                                <span>9:10 (19/05/2019)</span>
+                            </div>
+                        </div>
+                        <a href="" style="text-decoration: none; color: black;">
+                            <div class="row pb-3 pl-4 no-gutters">
+                                <div class="col-md-4">
+                                    <img src="/img-posts/cn_2.jpeg" class="card-img-top" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body pt-0 pb-0">
+                                        <h5 class="card-title" style="font-size: 20px;">Vượt Nikon, Sony xếp thứ 2 thế
+                                            giới về
+                                            thị phần máy ảnh có thể thay đổi ống kính, Canon đứng đầu</h5>
+                                        <p class="card-text" style="font-size: 15px;">Theo số liệu từ cuộc họp cổ đông
+                                            mới đây,
+                                            Sony cho biết họ đã vượt Nikon trở thành nhà sản xuất máy ảnh hoán đổi ống
+                                            kính lớn
+                                            thứ 2 thế giới về thị phần, xếp sau Canon...</p>
+                                        <p class="card-text float-right" style="font-size: 16px;">
+                                            12 <i class="fas fa-chevron-circle-up mr-3" style="color: #4CAF50"></i>
+                                            1 <i class="fas fa-chevron-circle-down mr-3" style="color: #F44336;"></i>
+                                            22 <i class="fas fa-eye mr-3" style="color: #FFC107;"></i>
+                                            6 <i class="fas fa-comment-alt" style="color: #00BCD4;"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="row mb-3 mt-3">
+                            <div class='col-sm-1 ml-4'>
+                                <div class='img-round'>
+                                    <img src='/img-users/cp.jpg' alt="">
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="mb-0"><b>Ngọc Duyên</b></p>
+                                <span>8:12 (18/05/2019)</span>
+                            </div>
+                        </div>
+                        <a href="" style="text-decoration: none; color: black;">
+                            <div class="row pb-3 pl-4 no-gutters">
+                                <div class="col-md-4">
+                                    <img src="/img-posts/cn_3.jpg" class="card-img-top" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body pt-0 pb-0">
+                                        <h5 class="card-title" style="font-size: 20px;">Spansive Source: Sạc không dây 4
+                                            điện
+                                            thoại cùng lúc, xuyên được ốp dày 1cm</h5>
+                                        <p class="card-text" style="font-size: 15px;">Mới đây thì Spansive, một startup
+                                            công
+                                            nghệ đã chính thức bán ra Source, đế sạc không dây có khả năng 4 thiết bị
+                                            cùng lúc.
+                                            Điều khiến cho Source được chú ý hơn cả đó là người dùng có thể đặt điện
+                                            thoại ở bất
+                                            kỳ vị trí nào trên...</p>
+                                        <p class="card-text float-right" style="font-size: 16px;">
+                                            14 <i class="fas fa-chevron-circle-up mr-3" style="color: #4CAF50"></i>
+                                            7 <i class="fas fa-chevron-circle-down mr-3" style="color: #F44336;"></i>
+                                            30 <i class="fas fa-eye mr-3" style="color: #FFC107;"></i>
+                                            4 <i class="fas fa-comment-alt" style="color: #00BCD4;"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="row mb-3 mt-3">
+                            <div class='col-sm-1 ml-4'>
+                                <div class='img-round'>
+                                    <img src='/img-users/cp.jpg' alt="">
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="mb-0"><b>Quốc Trung</b></p>
+                                <span>7:06 (18/05/2019)</span>
+                            </div>
+                        </div>
+                        <a href="" style="text-decoration: none; color: black;">
+                            <div class="row pb-3 pl-4 no-gutters">
+                                <div class="col-md-4">
+                                    <img src="/img-posts/cn_4.jpg" class="card-img-top" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body pt-0 pb-0">
+                                        <h5 class="card-title" style="font-size: 20px;">Wi-Fi Alliance tạm thời gạch tên
+                                            Huawei,
+                                            không cho tham gia thảo luận gì nữa</h5>
+                                        <p class="card-text" style="font-size: 15px;">Không chỉ bị gạch tên khỏi hiệp
+                                            hội thẻ
+                                            nhớ SD (SD Association), Huawei còn đối mặt với khả năng bị loại khỏi danh
+                                            sách
+                                            thành viên thuộc Liên minh Wi-Fi (Wi-Fi Alliance) - một hội đồng với phần
+                                            lớn là các
+                                            công ty công nghệ Mỹ...</p>
+                                        <p class="card-text float-right" style="font-size: 16px;">
+                                            13 <i class="fas fa-chevron-circle-up mr-3" style="color: #4CAF50"></i>
+                                            0 <i class="fas fa-chevron-circle-down mr-3" style="color: #F44336;"></i>
+                                            15 <i class="fas fa-eye mr-3" style="color: #FFC107;"></i>
+                                            12 <i class="fas fa-comment-alt" style="color: #00BCD4;"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="row mb-3 mt-3">
+                            <div class='col-sm-1 ml-4'>
+                                <div class='img-round'>
+                                    <img src='/img-users/cp.jpg' alt="">
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="mb-0"><b>Minh Ngọc</b></p>
+                                <span>19:46 (17/05/2019)</span>
+                            </div>
+                        </div>
+                        <a href="" style="text-decoration: none; color: black;">
+                            <div class="row pb-3 pl-4 no-gutters">
+                                <div class="col-md-4">
+                                    <img src="/img-posts/cn_5.jpg" class="card-img-top" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body pt-0 pb-0">
+                                        <h5 class="card-title" style="font-size: 20px;">Apple tung cập nhật iOS 12.3.1
+                                            chính
+                                            thức: Sửa một số lỗi trong iMessage</h5>
+                                        <p class="card-text" style="font-size: 15px;">Apple vừa tung bản cập nhật iOS
+                                            12.3.1
+                                            chính thức, đây là bản sửa lỗi của 12.3 được ra mắt cách đây khoảng một tuần
+                                            trước
+                                            liên quan đến vấn đề liên lạc và nhắn tin....</p>
+                                        <p class="card-text float-right" style="font-size: 16px;">
+                                            5 <i class="fas fa-chevron-circle-up mr-3" style="color: #4CAF50"></i>
+                                            2 <i class="fas fa-chevron-circle-down mr-3" style="color: #F44336;"></i>
+                                            35 <i class="fas fa-eye mr-3" style="color: #FFC107;"></i>
+                                            23 <i class="fas fa-comment-alt" style="color: #00BCD4;"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Chưa có dữ liệu</div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Chưa có dữ liệu</div>
+            </div>
+
+        </div>
+        <div class="col-xl-4 pl-0">
+            <div class="col-xl-12 pl-0 pr-0 baiviet_chude_noibat">
+                <h6 class="tieude_noibat">Bài viết của tháng</h6>
+                <div class="media baiviet_noibat_tin">
+                    <img class="align-self-start mr-2" src="/img-posts/cn_6.jpg" alt="Generic placeholder image"
+                        width="30%">
+                    <div class="media-body">
+                        <h5 class="mb-1">VNPT và FPT cũng tăng băng thông internet, VNPT tăng gấp đôi , FPT tăng vừa vừa
+                        </h5>
+                        <p class="mb-2">Hôm qua thì trên mạng đã thảo luận sôi nổi chuyện Viettel tăng gấp đôi băng
+                            thông...</p>
+                    </div>
+                </div>
+                <div class="media baiviet_noibat_tin">
+                    <img class="align-self-start mr-2" src="/img-posts/cn_7.jpg" alt="Generic placeholder image"
+                        width="30%">
+                    <div class="media-body">
+                        <h5 class="mb-1">Trên tay quạt mini Solove F5: Nhỏ gọn, thiết kết đẹp, quạt mát, pin lâu giá 369
+                            ngàn
+                        </h5>
+                        <p class="mb-2">Anh em cũng biết Xiaomi luôn cho ra mắt nhiều loại quạt từ gia dụng, thông minh
+                            đến quạt...</p>
+                    </div>
+                </div>
+                <div class="media baiviet_noibat_tin">
+                    <img class="align-self-start mr-2" src="/img-posts/cn_8.jpg" alt="Generic placeholder image"
+                        width="30%">
+                    <div class="media-body">
+                        <h5 class="mb-1">Huawei sẽ không thể hỗ trợ khe thẻ nhớ microSD trên điện thoại của họ nữa?
+                        </h5>
+                        <p class="mb-2">Nằm trong chuỗi các hệ lụy từ lệnh cấm tất cả mọi sản phẩm của Huawei trên đất
+                            Mỹ, hãng công...</p>
+                    </div>
+                </div>
+                <div class="media baiviet_noibat_tin">
+                    <img class="align-self-start mr-2" src="/img-posts/cn_9.jpg" alt="Generic placeholder image"
+                        width="30%">
+                    <div class="media-body">
+                        <h5 class="mb-1">Apple xác nhận 3 model iPhone 2019, là bản nâng cấp của Xr, Xs hiện tại
+                        </h5>
+                        <p class="mb-2">Dựa vào các tài liệu mà Apple đăng ký với ủy ban kinh tế Á-Âu (Eurasian), có thể
+                            nói đây là lần...</p>
+                    </div>
+                </div>
+                <div class="media baiviet_noibat_tin">
+                    <img class="align-self-start mr-2" src="/img-posts/cn_10.jpg" alt="Generic placeholder image"
+                        width="30%">
+                    <div class="media-body">
+                        <h5 class="mb-1">[Thủ thuật] Hướng dẫn tải về Windows 10 1903 ISO chuẩn từ Microsoft
+                        </h5>
+                        <p class="mb-2">Hiện tại anh em đã có thể cập nhật lên Windows 10 May 2019 (build 1903) trực
+                            tiếp từ Windows...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include template/footer %>
